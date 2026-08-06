@@ -1,0 +1,76 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+html {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  margin: 0;
+}
+
+/* Base styling for dark mode */
+.dark body {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+/* Custom dark mode utility overrides for instant dark mode compatibility */
+.dark .bg-white {
+  background-color: #1e293b !important;
+}
+
+.dark .text-slate-900, 
+.dark .text-slate-800, 
+.dark .text-gray-900 {
+  color: #f8fafc !important;
+}
+
+.dark .text-slate-700, 
+.dark .text-slate-600, 
+.dark .text-slate-500, 
+.dark .text-gray-600, 
+.dark .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+.dark .border-slate-200, 
+.dark .border-slate-100, 
+.dark .border-gray-200 {
+  border-color: #334155 !important;
+}
+
+.dark .bg-slate-50, 
+.dark .bg-slate-100 {
+  background-color: #0f172a !important;
+}
+
+.dark .hover\:bg-slate-50:hover, 
+.dark .hover\:bg-slate-100:hover {
+  background-color: #334155 !important;
+}
+
+.dark input, 
+.dark textarea, 
+.dark select {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+.dark input::placeholder, 
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #1e293b !important;
+}
+
