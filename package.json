@@ -17,6 +17,7 @@
     "@capacitor/core": "^5.2.0",
     "@emotion/react": "^11.13.3",
     "@supabase/supabase-js": "^2.110.8",
+    "exceljs": "^4.4.0",
     "framer-motion": "^11.5.4",
     "lucide-react": "0.522.0",
     "react": "^18.3.1",
