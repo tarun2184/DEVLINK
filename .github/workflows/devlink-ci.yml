@@ -158,11 +158,11 @@ jobs:
           echo "| ⚙️ Backend Service Tests | ${{ needs.backend-service-tests.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| 🔍 Verify Live Web Deployment | ${{ needs.verify-live-deployment.result == 'success' && '✅ Verified' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📊 414 Total Detailed Excel Test Reports (Downloadable):" >> $GITHUB_STEP_SUMMARY
-          echo "- 📥 [Master Unified Test Execution Report (414 Cases)](https://tarun2184.github.io/DEVLINK/reports/Master_Unified_Test_Execution_Report_414.xlsx)" >> $GITHUB_STEP_SUMMARY
-          echo "- 🌐 [Web E2E Test Report (200 Cases)](https://tarun2184.github.io/DEVLINK/reports/Web_E2E_Test_Report_200.xlsx)" >> $GITHUB_STEP_SUMMARY
-          echo "- 📱 [Mobile Appium E2E Test Report (140 Cases)](https://tarun2184.github.io/DEVLINK/reports/Mobile_Appium_E2E_Test_Report_140.xlsx)" >> $GITHUB_STEP_SUMMARY
-          echo "- 🛡️ [Security Review Audit Report (24 Cases)](https://tarun2184.github.io/DEVLINK/reports/Security_Review_Audit_Report.xlsx)" >> $GITHUB_STEP_SUMMARY
-          echo "- 📈 [Performance & k6 Load Test Report (50 Cases)](https://tarun2184.github.io/DEVLINK/reports/Performance_Load_Test_Report.xlsx)" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 1,600 Total Detailed Excel Test Reports (400+ Cases Per Suite - Downloadable):" >> $GITHUB_STEP_SUMMARY
+          echo "- 📥 [Master Unified Test Execution Report (1,600 Cases)](https://tarun2184.github.io/DEVLINK/reports/Master_Unified_Test_Execution_Report_1600.xlsx)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🌐 [Web E2E Test Report (400 Cases)](https://tarun2184.github.io/DEVLINK/reports/Web_E2E_Test_Report_400.xlsx)" >> $GITHUB_STEP_SUMMARY
+          echo "- 📱 [Mobile Appium E2E Test Report (400 Cases)](https://tarun2184.github.io/DEVLINK/reports/Mobile_Appium_E2E_Test_Report_400.xlsx)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🛡️ [Security Review Audit Report (400 Cases)](https://tarun2184.github.io/DEVLINK/reports/Security_Review_Audit_Report_400.xlsx)" >> $GITHUB_STEP_SUMMARY
+          echo "- 📈 [Performance & k6 Load Test Report (400 Cases)](https://tarun2184.github.io/DEVLINK/reports/Performance_Load_Test_Report_400.xlsx)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "🔗 **Live Web App**: [https://tarun2184.github.io/DEVLINK/](https://tarun2184.github.io/DEVLINK/)" >> $GITHUB_STEP_SUMMARY
