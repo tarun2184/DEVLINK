@@ -1,0 +1,46 @@
+name: API Baseline Load Testing (k6)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'scripts/**'
+      - '.github/workflows/load-test.yml'
+  workflow_dispatch:
+
+jobs:
+  load-test:
+    name: 📈 API Baseline Load Test (100 VUs / 1m)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup k6 Load Tester
+        uses: grafana/setup-k6-action@v1
+
+      - name: Execute k6 Load Test (100 VUs, 1 min)
+        run: |
+          k6 run --summary-export=summary.json scripts/load-test.js
+        env:
+          TARGET_URL: 'https://tarun2184.github.io/DEVLINK/'
+
+      - name: Parse k6 Performance Results & Generate Report
+        if: always()
+        run: |
+          node scripts/parseK6Summary.js summary.json
+
+      - name: Upload k6 Summary Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-load-test-summary
+          path: summary.json
