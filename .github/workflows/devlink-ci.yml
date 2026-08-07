@@ -50,6 +50,9 @@ jobs:
         run: npm ci
 
       - name: Build Web App & Generate Excel Reports
+        env:
+          VITE_SUPABASE_URL: 'https://vdvqkzgefcmfptafqqdi.supabase.co'
+          VITE_SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkdnFremdlZmNtZnB0YWZxcWRpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MTY2OTA0MywiZXhwIjoyMDk3MjQ1MDQzfQ.vfve5Dxm5A4OinmNv8zKUZrYwP-6JPewqYKOuYScyBQ'
         run: |
           npm run build
           cp dist/index.html dist/404.html
