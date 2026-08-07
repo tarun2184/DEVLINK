@@ -1,9 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
 const DEFAULT_SUPABASE_URL = 'https://vdvqkzgefcmfptafqqdi.supabase.co';
-const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkdnFremdlZmNtZnB0YWZxcWRpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MTY2OTA0MywiZXhwIjoyMDk3MjQ1MDQzfQ.vfve5Dxm5A4OinmNv8zKUZrYwP-6JPewqYKOuYScyBQ';
+const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkdnFremdlZmNtZnB0YWZxcWRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2NjkwNDMsImV4cCI6MjA5NzI0NTA0M30.3MYJGXwGnUtHB2kwFHFhvEn69Y33aB596o9AqnNcnys';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL;
+const rawUrl = import.meta.env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL;
+const supabaseUrl = rawUrl ? rawUrl.replace(/\/rest\/v1\/?$/, '') : '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY;
 
 // Determine if Supabase is properly configured in env variables
@@ -43,10 +44,10 @@ export async function checkSupabaseConnection(): Promise<boolean> {
   }
 
   try {
-    // Try to select a single row from the profiles table to check table availability
-    const { error } = await supabase.from('profiles').select('id').limit(1);
+    // Check Supabase Auth service connectivity
+    const { error } = await supabase.auth.getSession();
     if (error) {
-      console.warn('Supabase configuration exists, but database is not ready or connection failed:', error.message);
+      console.warn('Supabase auth session check failed:', error.message);
       connectionHealthyState = false;
     } else {
       console.log('Supabase connection verified successfully.');
