@@ -110,12 +110,16 @@ export const supabaseService = {
     
     // Create matching profiles row for the new user
     if (data.user) {
-      await supabase.from('profiles').insert([{
-        id: data.user.id,
-        email: data.user.email,
-        full_name: email.split('@')[0],
-        role: 'developer'
-      }]);
+      try {
+        await supabase.from('profiles').upsert([{
+          id: data.user.id,
+          email: data.user.email,
+          full_name: email.split('@')[0],
+          role: 'developer'
+        }], { onConflict: 'id' });
+      } catch (err) {
+        console.warn('Profiles upsert note:', err);
+      }
     }
     
     return { user: data.user, error: null };
