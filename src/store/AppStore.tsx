@@ -158,14 +158,11 @@ export function AppStoreProvider({ children }: {children: React.ReactNode;}) {
       setIsCheckingConnection(true);
       const healthy = await checkSupabaseConnection();
       setIsCheckingConnection(false);
+      setIsDemoMode(!healthy);
 
       if (!healthy) {
-        setIsDemoMode(true);
-        console.warn('Falling back to Local Demo Mode.');
-        return;
+        console.warn('Supabase connection warning. Check keys or network.');
       }
-
-      setIsDemoMode(false);
 
       // Fetch initial Supabase user
       supabaseService.getUser().then((sbUser) => {
