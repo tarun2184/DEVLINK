@@ -43,10 +43,10 @@ export function DeveloperInbox() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <button
-            onClick={() => navigate('/developer')}
+            onClick={() => navigate(-1)}
             className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">
             <ArrowLeftIcon className="h-3.5 w-3.5" />
-            Back to Developer Dashboard
+            Back
           </button>
           <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2">
             <InboxIcon className="h-6 w-6 text-indigo-600" />

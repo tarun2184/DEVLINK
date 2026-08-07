@@ -68,12 +68,22 @@ export function UploadProject() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <button
-        onClick={() => navigate('/developer')}
-        className="mb-5 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-800">
-        <ArrowLeftIcon className="h-4 w-4" />
-        Back to dashboard
-      </button>
+      <div className="flex items-center justify-between mb-5">
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors">
+          <ArrowLeftIcon className="h-4 w-4" />
+          Back
+        </button>
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={!canSubmit}
+          className="inline-flex items-center gap-1.5 rounded-xl bg-indigo-600 px-4 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-slate-300">
+          <UploadCloudIcon className="h-4 w-4" />
+          Publish Project
+        </button>
+      </div>
 
       <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">
         Upload a project
@@ -213,7 +223,7 @@ export function UploadProject() {
         <div className="flex justify-end gap-2 pt-2">
           <button
             type="button"
-            onClick={() => navigate('/developer')}
+            onClick={() => navigate(-1)}
             className="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">
             Cancel
           </button>

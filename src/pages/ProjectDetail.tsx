@@ -52,11 +52,10 @@ export function ProjectDetail() {
   return (
     <div>
       <button
-        onClick={() => navigate('/client')}
+        onClick={() => navigate(-1)}
         className="mb-5 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-800">
-        
         <ArrowLeftIcon className="h-4 w-4" />
-        Back to browse
+        Back
       </button>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

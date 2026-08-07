@@ -52,10 +52,10 @@ export function DeveloperProfile() {
   return (
     <div className="space-y-8">
       <button
-        onClick={() => navigate('/client')}
+        onClick={() => navigate(-1)}
         className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
         <ArrowLeftIcon className="h-4 w-4" />
-        Back to projects
+        Back
       </button>
 
       {/* Developer Header Banner */}

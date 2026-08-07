@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { CodeXmlIcon, LogOutIcon, RepeatIcon, UserCogIcon, SunIcon, MoonIcon } from 'lucide-react';
+import { CodeXmlIcon, LogOutIcon, RepeatIcon, UserCogIcon, SunIcon, MoonIcon, ArrowLeftIcon } from 'lucide-react';
 import { useAppStore } from '../store/AppStore';
 import { EditProfileModal } from './EditProfileModal';
 
@@ -29,6 +29,7 @@ export function Header() {
 
   const isClient = role === 'client';
   const homePath = isClient ? '/client' : '/developer';
+  const isSubPage = location.pathname !== '/client' && location.pathname !== '/developer' && location.pathname !== '/';
 
   const clientNav = [
     { label: 'Browse', to: '/client' },
@@ -52,14 +53,24 @@ export function Header() {
     <>
       <header className="sticky top-0 z-30 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Link to={homePath} className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
-              <CodeXmlIcon className="h-5 w-5" />
-            </span>
-            <span className="text-lg font-extrabold tracking-tight text-slate-900">
-              DevLink
-            </span>
-          </Link>
+          <div className="flex items-center gap-2">
+            {isSubPage && (
+              <button
+                onClick={() => navigate(-1)}
+                className="inline-flex items-center justify-center rounded-lg p-1.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+                title="Go Back">
+                <ArrowLeftIcon className="h-5 w-5" />
+              </button>
+            )}
+            <Link to={homePath} className="flex items-center gap-2">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm">
+                <CodeXmlIcon className="h-5 w-5" />
+              </span>
+              <span className="text-lg font-extrabold tracking-tight text-slate-900">
+                DevLink
+              </span>
+            </Link>
+          </div>
 
           <nav className="hidden items-center gap-1 sm:flex">
             {nav.map((item) => {

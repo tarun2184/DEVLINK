@@ -1,5 +1,7 @@
 
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { App as CapacitorApp } from '@capacitor/app';
 import { AppStoreProvider } from './store/AppStore';
 import { AuthGate } from './components/AuthGate';
 import { Layout } from './components/Layout';
@@ -12,7 +14,22 @@ import { ClientInbox } from './pages/ClientInbox';
 import { DeveloperDashboard } from './pages/DeveloperDashboard';
 import { DeveloperInbox } from './pages/DeveloperInbox';
 import { UploadProject } from './pages/UploadProject';
+
 export function App() {
+  useEffect(() => {
+    // Enable Android Hardware Back Button navigation support
+    const backHandler = CapacitorApp.addListener('backButton', ({ canGoBack }) => {
+      if (canGoBack) {
+        window.history.back();
+      } else {
+        CapacitorApp.exitApp();
+      }
+    });
+
+    return () => {
+      backHandler.then((h) => h.remove());
+    };
+  }, []);
   return (
     <AppStoreProvider>
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>

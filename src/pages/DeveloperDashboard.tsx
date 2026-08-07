@@ -32,6 +32,16 @@ export function DeveloperDashboard() {
 
   const [activeTab, setActiveTab] = useState<'overview' | 'projects' | 'messages' | 'history'>('overview');
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [isEditingBio, setIsEditingBio] = useState(false);
+  const [bioInput, setBioInput] = useState(currentDeveloper.bio || '');
+  const [bioSavedSuccess, setBioSavedSuccess] = useState(false);
+
+  const handleSaveBio = () => {
+    useAppStore.getState().updateCurrentDeveloper({ bio: bioInput.trim() });
+    setBioSavedSuccess(true);
+    setIsEditingBio(false);
+    setTimeout(() => setBioSavedSuccess(false), 2000);
+  };
 
   const myProjects = projects.filter(
     (p) => p.developerId === currentDeveloper.id
@@ -63,9 +73,53 @@ export function DeveloperDashboard() {
               </span>
             </div>
             <p className="text-sm font-medium text-slate-600 mt-0.5">{currentDeveloper.title}</p>
-            {currentDeveloper.bio && (
-              <p className="text-xs text-slate-500 mt-1 max-w-lg line-clamp-2">{currentDeveloper.bio}</p>
-            )}
+            
+            {/* Inline Bio Section with Save Bio Option */}
+            <div className="mt-2 max-w-lg">
+              {isEditingBio ? (
+                <div className="space-y-2">
+                  <textarea
+                    rows={2}
+                    value={bioInput}
+                    onChange={(e) => setBioInput(e.target.value)}
+                    placeholder="Enter your professional bio..."
+                    className="w-full rounded-xl border border-indigo-300 p-2 text-xs text-slate-800 outline-none focus:ring-2 focus:ring-indigo-500/20"
+                  />
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleSaveBio}
+                      className="rounded-lg bg-emerald-600 px-3 py-1 text-xs font-bold text-white shadow-sm hover:bg-emerald-700 transition-colors">
+                      Save Bio
+                    </button>
+                    <button
+                      onClick={() => setIsEditingBio(false)}
+                      className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-start gap-2">
+                  <p className="text-xs text-slate-500 line-clamp-2">
+                    {currentDeveloper.bio || 'No bio set yet. Click Edit Bio to add one.'}
+                  </p>
+                  <button
+                    onClick={() => {
+                      setBioInput(currentDeveloper.bio || '');
+                      setIsEditingBio(true);
+                    }}
+                    className="shrink-0 text-[11px] font-bold text-indigo-600 hover:underline">
+                    Edit Bio
+                  </button>
+                </div>
+              )}
+              {bioSavedSuccess && (
+                <p className="text-[11px] font-semibold text-emerald-600 mt-1 animate-fade-in">
+                  ✓ Bio saved successfully!
+                </p>
+              )}
+            </div>
+
             <div className="mt-2 flex flex-wrap items-center gap-3 text-[11px] font-semibold text-slate-500">
               {currentDeveloper.currentCity && (
                 <span className="bg-slate-100 px-2 py-0.5 rounded text-slate-700">City: {currentDeveloper.currentCity}</span>
