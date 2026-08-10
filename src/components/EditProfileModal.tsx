@@ -224,7 +224,22 @@ export function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
 
               {/* Bio */}
               <label className="block">
-                <span className="block text-xs font-medium text-slate-700 mb-1">Bio / Profile Summary</span>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="block text-xs font-medium text-slate-700">Bio / Profile Summary</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      updateCurrentDeveloper({ bio: bio.trim() });
+                      setSavedSuccess(true);
+                      setTimeout(() => {
+                        setSavedSuccess(false);
+                        onClose();
+                      }, 1200);
+                    }}
+                    className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 hover:bg-emerald-100 transition-colors shadow-sm">
+                    ✓ Save Bio Changes
+                  </button>
+                </div>
                 <textarea
                   rows={3}
                   value={bio}

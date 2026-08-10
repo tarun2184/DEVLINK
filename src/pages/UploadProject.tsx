@@ -115,7 +115,7 @@ export function UploadProject() {
           </select>
         </Field>
 
-        <Field label="Project Price / Budget ($)" required>
+        <Field label="Project Price / Budget (₹)" required>
           <input
             type="number"
             value={price}

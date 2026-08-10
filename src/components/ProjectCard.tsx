@@ -36,7 +36,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
           </span>
           {project.price !== undefined && project.price > 0 && (
             <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 border border-emerald-100">
-              ${project.price.toLocaleString()}
+              ₹{project.price.toLocaleString('en-IN')}
             </span>
           )}
           <span className="text-xs text-slate-400">{project.createdAt}</span>

@@ -74,7 +74,7 @@ export function ProjectDetail() {
               </span>
               {project.price !== undefined && project.price > 0 && (
                 <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 border border-emerald-100">
-                  Budget: ${project.price.toLocaleString()}
+                  Budget: ₹{project.price.toLocaleString('en-IN')}
                 </span>
               )}
             </div>

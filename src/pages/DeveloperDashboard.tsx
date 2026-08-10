@@ -15,7 +15,9 @@ import {
 } from 'lucide-react';
 import { useAppStore } from '../store/AppStore';
 import { EditProfileModal } from '../components/EditProfileModal';
-import { UserCogIcon } from 'lucide-react';
+import { EditProjectModal } from '../components/EditProjectModal';
+import { UserCogIcon, PencilIcon } from 'lucide-react';
+import { Project } from '../types';
 import { projects as seedProjects } from '../data/seed';
 
 export function DeveloperDashboard() {
@@ -32,6 +34,7 @@ export function DeveloperDashboard() {
 
   const [activeTab, setActiveTab] = useState<'overview' | 'projects' | 'messages' | 'history'>('overview');
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [bioInput, setBioInput] = useState(currentDeveloper.bio || '');
   const [bioSavedSuccess, setBioSavedSuccess] = useState(false);
@@ -88,12 +91,12 @@ export function DeveloperDashboard() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={handleSaveBio}
-                      className="rounded-lg bg-emerald-600 px-3 py-1 text-xs font-bold text-white shadow-sm hover:bg-emerald-700 transition-colors">
-                      Save Bio
+                      className="rounded-lg bg-emerald-600 px-4 py-1.5 text-xs font-bold text-white shadow-md hover:bg-emerald-700 transition-colors flex items-center gap-1">
+                      ✓ Save Bio Changes
                     </button>
                     <button
                       onClick={() => setIsEditingBio(false)}
-                      className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200">
+                      className="rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-200">
                       Cancel
                     </button>
                   </div>
@@ -165,6 +168,12 @@ export function DeveloperDashboard() {
       <EditProfileModal
         isOpen={isEditProfileOpen}
         onClose={() => setIsEditProfileOpen(false)}
+      />
+
+      <EditProjectModal
+        project={editingProject}
+        isOpen={Boolean(editingProject)}
+        onClose={() => setEditingProject(null)}
       />
 
       {/* Stats Cards */}
@@ -321,16 +330,26 @@ export function DeveloperDashboard() {
                           <h3 className="text-sm font-semibold text-slate-900">{project.title}</h3>
                           {project.price && (
                             <span className="inline-block mt-1 text-[11px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100">
-                              ${project.price.toLocaleString()}
+                              ₹{project.price.toLocaleString('en-IN')}
                             </span>
                           )}
                         </div>
-                        <button
-                          onClick={() => deleteProject(project.id)}
-                          aria-label={`Delete ${project.title}`}
-                          className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600">
-                          <Trash2Icon className="h-4 w-4" />
-                        </button>
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => setEditingProject(project)}
+                            aria-label={`Edit ${project.title}`}
+                            className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-indigo-50 hover:text-indigo-600"
+                            title="Edit Project">
+                            <PencilIcon className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => deleteProject(project.id)}
+                            aria-label={`Delete ${project.title}`}
+                            className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                            title="Delete Project">
+                            <Trash2Icon className="h-4 w-4" />
+                          </button>
+                        </div>
                       </div>
                       <p className="mt-2 line-clamp-2 text-xs text-slate-500">{project.summary}</p>
                     </div>
@@ -364,7 +383,7 @@ export function DeveloperDashboard() {
                           </span>
                           {project.price && (
                             <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
-                              ${project.price.toLocaleString()}
+                              ₹{project.price.toLocaleString('en-IN')}
                             </span>
                           )}
                         </div>

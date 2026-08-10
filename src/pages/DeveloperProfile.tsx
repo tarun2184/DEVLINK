@@ -14,7 +14,7 @@ export function DeveloperProfile() {
 
   const [clientName, setClientName] = useState('');
   const [clientEmail, setClientEmail] = useState('');
-  const [budget, setBudget] = useState('$5k - $10k');
+  const [budget, setBudget] = useState('₹50,000 - ₹1,00,000');
   const [body, setBody] = useState('');
   const [sentSuccess, setSentSuccess] = useState(false);
 
@@ -198,10 +198,10 @@ export function DeveloperProfile() {
                     value={budget}
                     onChange={(e) => setBudget(e.target.value)}
                     className="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
-                    <option value="< $2,000">&lt; $2,000</option>
-                    <option value="$2,000 - $5,000">$2,000 - $5,000</option>
-                    <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                    <option value="$10,000+">$10,000+</option>
+                    <option value="< ₹20,000">&lt; ₹20,000</option>
+                    <option value="₹20,000 - ₹50,000">₹20,000 - ₹50,000</option>
+                    <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+                    <option value="₹1,00,000+">₹1,00,000+</option>
                   </select>
                 </label>
 

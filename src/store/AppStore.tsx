@@ -34,6 +34,7 @@ interface AppStoreValue {
   addProject: (
     input: Omit<Project, 'id' | 'developerId' | 'createdAt'>
   ) => Project;
+  updateProject: (id: string, updates: Partial<Project>) => void;
   deleteProject: (id: string) => void;
   sendMessage: (input: Omit<Message, 'id' | 'createdAt'>) => Message;
   messagesForDeveloper: (developerId: string) => Message[];
@@ -426,6 +427,13 @@ export function AppStoreProvider({ children }: {children: React.ReactNode;}) {
         }
         addLog('project_uploaded', 'New Project Published', `Uploaded project "${project.title}"`);
         return project;
+      },
+      updateProject: (id, updates) => {
+        setProjects((prev) =>
+          prev.map((p) => (p.id === id ? { ...p, ...updates } : p))
+        );
+        const target = projects.find((p) => p.id === id);
+        addLog('project_uploaded', 'Project Details Updated', `Updated project "${target?.title || id}"`);
       },
       deleteProject: (id) => {
         const p = projects.find((proj) => proj.id === id);
